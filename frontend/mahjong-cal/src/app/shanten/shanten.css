@@ -1,32 +1,33 @@
 :host, html, body {
   height: 100%;
   margin: 0;
-  background-color: #f9fbfd; /* 更柔和背景 */
+  background-color: #f9fbfd; /* 柔和背景 */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #444; /* 默认文字颜色稍暗 */
+  color: #444;
 }
 
+/* 布局容器 */
 :host {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  gap: 1.5rem; /* 增加间距，更舒适 */
-  padding: 1rem; /* 防止边缘紧贴 */
+  gap: 1.5rem;
+  padding: 1rem;
 }
 
-/* 限制宽度和居中 */
+/* 控制宽度居中 */
 :host > p.title,
 :host > div.infosInput,
 :host > button,
 :host > div[ng-reflect-ng-if] {
-  max-width: 400px;  /* 宽度稍微增加 */
-  width: 100%;       /* 允许缩小 */
+  max-width: 600px;
+  width: 100%;
   text-align: center;
 }
 
-/* 标题 */
+/* 标题样式 */
 .title {
   font-size: 2.4rem;
   font-weight: 700;
@@ -36,34 +37,41 @@
   user-select: none;
 }
 
-/* 输入框区域 */
+/* 输入区域容器 */
 .infosInput {
   font-size: 1rem;
   color: #555;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;  /* 父容器撑开 */
-  max-width: 400px; /* 根据实际需求调整 */
+  width: 100%;
+  max-width: 400px;
 }
 
+/* 输入框样式 */
 .infosInput input {
   margin-left: 10px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem ;
   font-size: 1.1rem;
   border-radius: 8px;
   border: 1.8px solid #bbb;
-  width: 28ch; /* 28字符宽度 */
+  width: 100%;
+  max-width: 36ch;          /* 最多容纳36个字符 */
+  min-width: 28ch;          /* 保证最少显示28个字符 */
+  font-family: monospace;   /* 等宽字体 */
+  white-space: nowrap;      /* 不换行 */
+  overflow-x: auto;         /* 横向滚动 */
+  box-sizing: border-box;
 }
 
-
+/* 输入框聚焦状态 */
 .infosInput input:focus {
   border-color: #3498db;
   outline: none;
   box-shadow: 0 0 6px 2px rgba(52, 152, 219, 0.35);
 }
 
-/* 按钮 */
+/* 按钮样式 */
 button {
   padding: 0.75rem 2rem;
   font-size: 1.2rem;
@@ -81,7 +89,7 @@ button:hover {
   box-shadow: 0 6px 18px rgba(28, 89, 138, 0.6);
 }
 
-/* 听牌提示 */
+/* 听牌提示样式 */
 .noten {
   color: #27ae60;
   font-weight: 700;
@@ -97,6 +105,7 @@ button:hover {
   box-shadow: 0 2px 8px rgba(39, 174, 96, 0.25);
 }
 
+/* 未听牌样式 */
 .ten {
   color: #e67e22;
   font-weight: 700;
