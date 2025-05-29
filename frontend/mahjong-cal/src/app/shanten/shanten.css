@@ -51,13 +51,12 @@
 /* 输入框样式 */
 .infosInput input {
   margin-left: 10px;
-  padding: 0.5rem ;
+  padding: 0.5rem 1rem;
   font-size: 1.1rem;
   border-radius: 8px;
   border: 1.8px solid #bbb;
   width: 100%;
-  max-width: 36ch;          /* 最多容纳36个字符 */
-  min-width: 28ch;          /* 保证最少显示28个字符 */
+  width: 32ch;          /* 保证最少显示28个字符 */
   font-family: monospace;   /* 等宽字体 */
   white-space: nowrap;      /* 不换行 */
   overflow-x: auto;         /* 横向滚动 */
