@@ -5,19 +5,10 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule,FormsModule],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  //protected title = 'mahjong-cal';
-  protected tiles:string=''
-
-  print(str:string){
-    console.log(str)
-  }
-
-  getMPSZ(){
-    
-  }
+  protected title = 'mahjong-cal';
 }

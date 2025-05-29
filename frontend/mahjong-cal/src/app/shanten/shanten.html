@@ -1,0 +1,8 @@
+<p class="title">听牌计算器</p>
+<div class="infosInput">
+    您的手牌 ： <input [ngModel]="tilesStr()" (ngModelChange)="setTilesStr($event)" style="width: 25ch">
+</div>
+<button (click)="calculateShanten()">计算向听数与待牌</button>
+
+<div *ngIf="shanten()===0" class="noten">您已经听牌！ 您的待牌为{{tilesUseful()}}！</div>
+<div *ngIf="shanten()>0" class="ten">您的手牌目前{{shanten()}}向听！ 待牌为{{tilesUseful()}}，可以减少向听数</div>

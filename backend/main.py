@@ -6,21 +6,36 @@ from mahjong.shanten import Shanten
 from mahjong.tile import TilesConverter
 from pydantic import BaseModel
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from data import Tiles
+from utils import calculateTilesUseful,array36ToString
 
 
 calculator = HandCalculator()
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class HandRequest(BaseModel):
-    man: str   # 万子，如 "123"
-    pin: str   # 筒子，如 "456"
-    sou: str   # 索子，如 "789"
-    honors: str  # 字牌，如 "1122"（东东南南）
+    m: str   # 万子，如 "123"
+    p: str   # 筒子，如 "456"
+    s: str   # 索子，如 "789"
+    z: str  # 字牌，如 "1122"（东东南南）
 
 # 返回计算的向听数
 class ShantenResponse(BaseModel):
     shanten: int
+
+# 返回计算的有效进张
+class TilesUsefulResponse(BaseModel):
+    tilesUseful: str
 
 
 # useful helper
@@ -39,11 +54,25 @@ def print_hand_result(hand_result: HandResponse) -> None:
 async def calculate_shanten(hand: HandRequest):
     # 将字符串转为34张牌数组（mahjong库方法）
     tiles = TilesConverter.string_to_34_array(
-        man=hand.man,
-        pin=hand.pin,
-        sou=hand.sou,
-        honors=hand.honors,
+        man=hand.m,
+        pin=hand.p,
+        sou=hand.s,
+        honors=hand.z,
     )
     # 计算向听数
     shanten = Shanten().calculate_shanten(tiles)
     return ShantenResponse(shanten=shanten)
+
+
+@app.post("/tilesUseful", response_model=TilesUsefulResponse)
+async def calculate_tilesUseful(hand: HandRequest):
+    # 将字符串转为34张牌数组（mahjong库方法）
+    tiles = TilesConverter.string_to_34_array(
+        man=hand.m,
+        pin=hand.p,
+        sou=hand.s,
+        honors=hand.z,
+    )
+    # 计算有效进张
+    tilesUseful = calculateTilesUseful(tiles)
+    return TilesUsefulResponse(tilesUseful=array36ToString(tilesUseful))
