@@ -10,7 +10,7 @@ export class CalculateService {
 
   http=inject(HttpClient)
 
-  calculateSomething(data:Tiles,api:string){
+  calculateSomething(data:any,api:string){
     return this.http.post(api,data,{ observe: 'response'}).pipe(
       map(r=>{
             if(r.ok){

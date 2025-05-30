@@ -3,6 +3,17 @@
     您的手牌 ： <input [ngModel]="tilesStr()" (ngModelChange)="setTilesStr($event)">
 </div>
 <button (click)="calculateShanten()">计算向听数与待牌</button>
+<button (click)="calculateDecision()">计算舍牌</button>
 
 <div *ngIf="shanten()===0" class="noten">您已经听牌！ 待牌为{{tilesUseful()}}！</div>
 <div *ngIf="shanten()>0" class="ten">您的手牌目前{{shanten()}}向听！ 待牌为{{tilesUseful()}}，可以减少向听数</div>
+
+<ul class="infoDecision">
+    <li *ngFor="let s of scores();let i = index">
+        <div *ngIf="i<3">{{s.tile}} </div>
+        <div *ngIf="s.score.shanten===0">已经听牌</div>
+        <div *ngIf="s.score.shanten>0">{{s.score.shanten}}向听</div>
+        <div>待牌为 {{s.score.tilesUseful}}</div>
+        <div>残{{s.score.n}}枚</div>
+    </li>
+</ul>

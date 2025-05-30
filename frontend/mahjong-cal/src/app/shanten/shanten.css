@@ -133,3 +133,43 @@ button:hover {
   box-shadow: 0 4px 10px rgba(30, 144, 255, 0.25);
   user-select: none;
 }
+
+.infoDecision {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;           /* 横向排列li */
+  gap: 16px;               /* 列表项之间间距 */
+  max-width: 100%;
+  overflow-x: auto;        /* 超出宽度可以横向滚动 */
+}
+
+.infoDecision li {
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 12px 16px;
+  min-width: 120px;        /* 每个li最小宽度 */
+  display: flex;
+  flex-direction: column;  /* li里面内容竖直排列 */
+  gap: 4px;
+  flex-shrink: 0;          /* 防止缩小 */
+}
+
+.infoDecision li div:first-child {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #222;
+}
+
+.infoDecision li div:nth-child(2) {
+  color: #007acc;
+  font-weight: 500;
+}
+
+.infoDecision li div:nth-child(n+3) {
+  color: #555;
+  font-size: 0.9em;
+}
+
+
